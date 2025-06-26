@@ -44,6 +44,12 @@ int main(int argc, char *argv[]){
         close(sockfd);
         return 1;
     }
+
+    // envia primeiro o tamanho do nome do arquivo,
+    // depois o nome do arquivo em si
+    int filename_len = strlen(file);
+    send(sockfd, &filename_len, sizeof(int), 0);
+    send(sockfd, file, filename_len, 0);
     
     // envia dados
     int bytes;
